@@ -1,0 +1,20 @@
+<div class="flex justify-content-center align-items-center min-h-screen">
+    <p-card header="Log in to the Loyalty system" styleClass="md:w-30rem">
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="p-fluid">
+            <div class="field mb-3">
+                <label for="login" class="mb-1 block">Логін</label>
+                <input id="login" type="text" pInputText formControlName="login" placeholder="Ваш логін" />
+            </div>
+
+            <div class="field mb-4">
+                <label for="password" class="mb-1 block">Пароль</label>
+                <input id="password" type="password" pPassword formControlName="password" [feedback]="false"
+                    placeholder="••••••••" />
+            </div>
+
+            <button pButton type="submit" label="Увійти" icon="pi pi-sign-in" [loading]="loading"
+                [disabled]="form.invalid || loading">
+            </button>
+        </form>
+    </p-card>
+</div>

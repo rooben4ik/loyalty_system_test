@@ -1,0 +1,51 @@
+<div class="p-4" *ngIf="schema as s; else loadingOrError">
+    <div [ngStyle]="{
+           'background-color': s.color || '#f8f9fa',
+           'border-radius':'10px',
+           'padding':'1rem'
+         }">
+      <h3 class="mb-3 text-center">{{ s.name }}</h3>
+  
+      <form *ngIf="form" [formGroup]="form" class="grid gap-3">
+        <div *ngFor="let el of s.elements; trackBy: trackByName"
+             class="col-12 sm:col-6 lg:col-4">
+          <div class="surface-card border-1 surface-border border-round p-3">
+            <label class="mb-2 block text-600" [attr.for]="controlNameOf(el)">
+              {{ el.name }}
+            </label>
+      
+            <input *ngIf="el.type === 'text'"
+                   pInputText
+                   class="w-full p-inputtext-lg input-tall"
+                   type="text"
+                   [id]="controlNameOf(el)"
+                   [formControlName]="controlNameOf(el)"
+                   [placeholder]="el.text"
+                   (keydown)="onKeyDownLettersOnly($event)"
+                   (paste)="onPasteLettersOnly($event)" />
+      
+            <input *ngIf="el.type === 'number'"
+                   pInputText
+                   class="w-full p-inputtext-lg input-tall"
+                   type="text"
+                   inputmode="numeric"
+                   [id]="controlNameOf(el)"
+                   [formControlName]="controlNameOf(el)"
+                   [placeholder]="el.text"
+                   (keydown)="onKeyDownNumberOnly($event)"
+                   (paste)="onPasteNumberOnly($event)" />
+          </div>
+        </div>
+      </form>
+      
+      
+    </div>
+  </div>
+  
+  <ng-template #loadingOrError>
+    <div class="p-4">
+      <p *ngIf="loading">Loading…</p>
+      <p *ngIf="!loading && errorText" class="p-error">{{ errorText }}</p>
+    </div>
+  </ng-template>
+  

@@ -1,0 +1,9 @@
+{
+    "/api": {
+      "target": "https://dev.lsbonus.com",
+      "secure": true,
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": { "^/api": "" }
+    }
+  }
